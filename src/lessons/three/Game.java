@@ -3,33 +3,50 @@ package lessons.three;
 import java.util.Random;
 import java.util.Scanner;
 
+
+//В РАЗРАБОТКЕ!
+//
+//
+//
+//
 public class Game {
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        Random random = new Random();
-        System.out.println("Введите число от 1 до 100: ");
-        int number = scan.nextInt();
-        int randomize = 100;
+        Scanner scanner = new Scanner(System.in);
+        Random randomize = new Random();
+        System.out.println("Enter value from 1 to 100");
+        int value = scanner.nextInt();
         boolean win = true;
-        while (win){
-            int next = random.nextInt(randomize);
-            if (next < number){
-                System.out.println("Число меньше * ?");
-                scan.next();
-            }else if (next > number){
-                System.out.println("Число больше * ?");
-            }else if (next == number){
-                System.out.println("Красавчик!");
+        int random = randomize.nextInt(100);
+        System.out.println("Value: " + value);
+        System.out.println("Random number: " + random);
+        int currentRandom = random;
+        while(win){
+            if (random < value){
+                System.out.println("Is number leather than value?");
+                boolean answer = answer(scanner.next());
+                if(answer){
+                    random = randomize.nextInt(100 - random) + random;
+                    System.out.println("Random number: " + random);
+                }
+            }else if (random > value){
+                System.out.println("Is number higher than value?");
+                boolean answer = answer(scanner.next());
+                if(answer){
+                    random = randomize.nextInt(random);
+                    System.out.println("Random number: " + random);
+                }
+            }if (random == value){
+                System.out.println("This value = " + random);
                 win = false;
             }
         }
     }
 
-    public static boolean otvet(String string){
-        if (string.equals("Yes")){
-
+    public static boolean answer(String answer){
+        if (answer.equals("Yes")) {
+            return true;
         }else{
-
+            return false;
         }
     }
 }
