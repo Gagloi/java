@@ -3,41 +3,50 @@ package lessons.three;
 import java.util.Random;
 import java.util.Scanner;
 
-
-//В РАЗРАБОТКЕ!
-//
-//
-//
-//
 public class Game {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Random randomize = new Random();
-        System.out.println("Enter value from 1 to 100");
-        int value = scanner.nextInt();
+
+        int value = initValue(scanner);
+
         boolean win = true;
-        int random = randomize.nextInt(100);
+
+        int min = 0;
+        int max = 100;
+        int random = myRandom(min, max);
+
         System.out.println("Value: " + value);
         System.out.println("Random number: " + random);
-        int currentRandom = random;
+
         while(win){
-            if (random < value){
-                System.out.println("Is number leather than value?");
+            if (question()) {
+                System.out.println("Is value leather than " + random + " ?");
                 boolean answer = answer(scanner.next());
-                if(answer){
-                    random = randomize.nextInt(100 - random) + random;
-                    System.out.println("Random number: " + random);
+                if (answer) {
+                    max = random;
+                    random = myRandom(min, max);
+                } else {
+                    min = random;
+                    random = myRandom(min, max);
                 }
-            }else if (random > value){
-                System.out.println("Is number higher than value?");
+                if (random == value) {
+                    System.out.println("This value = " + random);
+                    win = false;
+                }
+            }else {
+                System.out.println("Is value higher than " + random + " ?");
                 boolean answer = answer(scanner.next());
-                if(answer){
-                    random = randomize.nextInt(random);
-                    System.out.println("Random number: " + random);
+                if (!answer) {
+                    max = random;
+                    random = myRandom(min, max);
+                } else {
+                    min = random;
+                    random = myRandom(min, max);
                 }
-            }if (random == value){
-                System.out.println("This value = " + random);
-                win = false;
+                if (random == value) {
+                    System.out.println("This value = " + random);
+                    win = false;
+                }
             }
         }
     }
@@ -46,6 +55,27 @@ public class Game {
         if (answer.equals("Yes")) {
             return true;
         }else{
+            return false;
+        }
+    }
+
+    public static int myRandom(int from, int to){
+        Random random = new Random();
+        return random.nextInt(to - from) + (from + 1);
+    }
+
+    public static int initValue(Scanner scanner){
+        Random randomize = new Random();
+        System.out.println("Enter value from 1 to 100");
+        return scanner.nextInt();
+    }
+
+    public static boolean question(){
+        Random random = new Random();
+        int res = random.nextInt(2);
+        if (res == 1){
+            return true;
+        }else {
             return false;
         }
     }

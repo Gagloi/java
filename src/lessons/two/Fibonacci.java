@@ -5,10 +5,6 @@ public class Fibonacci {
     public static int curr = 1;
     public static void main(String[] args) {
         System.out.println(next());
-        System.out.println(next());
-        System.out.println(next());
-        System.out.println(next());
-        System.out.println(next());
     }
 
 
@@ -22,7 +18,7 @@ public class Fibonacci {
         }
         return lol(curr - 1) + lol(curr - 2);
     }
-    static int next(){
+    public static int next(){
         int curr = Fibonacci.curr++;
         return  lol(curr);
     }
