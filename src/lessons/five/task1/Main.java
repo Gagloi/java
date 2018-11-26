@@ -11,7 +11,8 @@ public class Main {
         Consumer consumer = new Consumer() {
             @Override
             public void accept(Object o) {
-                
+                Node node = (Node) o;
+                System.out.println(((Node) o).inf);
             }
         };
         tree.traverse(consumer);
