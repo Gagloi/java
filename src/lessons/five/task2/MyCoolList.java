@@ -11,7 +11,7 @@ public class MyCoolList implements Iterable{
     @Override
     public Iterator iterator() {
         Iterator iterator = new Iterator() {
-            int i = 0;
+            int i = -1;
             int n = MyCoolList.this.value.length;
             @Override
             public boolean hasNext() {
@@ -20,6 +20,7 @@ public class MyCoolList implements Iterable{
 
             @Override
             public Object next() {
+                i++;
                 Object next = MyCoolList.this.value[i];
                 return next;
             }
@@ -30,10 +31,9 @@ public class MyCoolList implements Iterable{
     public void add(Object object){
         Object[] value = new Object[this.value.length + 1];
         int i = 0;
-        for (Object it: value){
-            value[i] = it;
-            i++;
+        for (i = 0; i < this.value.length; i++){
+            value[i] = this.value[i];
         }
-        value[this.value.length + 1] = object;
+        value[this.value.length] = object;
     }
 }
