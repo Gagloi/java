@@ -1,6 +1,7 @@
 package lessons.four.task2;
 
 public abstract class Sort {
+
     public void sorting(Object[] objects){
         for(int i = 0; i < objects.length; i++){
 
@@ -20,5 +21,7 @@ public abstract class Sort {
 
         }
     }
-    public abstract boolean compare(Object object1, Object object2);
+    public  abstract boolean compare(Object object1, Object object2);
+
+
 }
