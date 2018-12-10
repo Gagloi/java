@@ -20,7 +20,7 @@ public class Main {
 
         list2.add(abonent2);
         list2.add(abonent3);
-        
+
         //Пересечение
         for (Abonent o: intersect(list1, list2)){
             System.out.println(o);
