@@ -1,5 +1,6 @@
 package lessons.seven.task3;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -28,6 +29,26 @@ public class User {
     public Set<User> getFriends() {
         return friends;
     }
+
+    public static int func(User one, User two){
+        int i = 0;
+        List<User> list = one.friends.stream()
+                .filter(it -> it.friends != null)
+                .collect(Collectors.toList());
+        //System.out.println(list);
+        while (!list.contains(two)){
+            i++;
+            list = list.stream()
+                    .filter(it -> it.friends != null)
+                    .flatMap(user -> user.friends.stream())
+                    .distinct()
+                    .collect(Collectors.toList());
+            System.out.println(list);
+        }
+        return i;
+    }
+
+
 
     @Override
     public String toString() {
