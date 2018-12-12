@@ -9,4 +9,11 @@ public class Block {
         endNumber = end;
     }
 
+    public int getStartNumber() {
+        return startNumber;
+    }
+
+    public int getEndNumber() {
+        return endNumber;
+    }
 }
