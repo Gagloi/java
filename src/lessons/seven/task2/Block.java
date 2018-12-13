@@ -13,6 +13,14 @@ public class Block {
         return startNumber;
     }
 
+    @Override
+    public String toString() {
+        return "Block{" +
+                "startNumber=" + startNumber +
+                ", endNumber=" + endNumber +
+                '}';
+    }
+
     public int getEndNumber() {
         return endNumber;
     }

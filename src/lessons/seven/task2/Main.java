@@ -29,24 +29,31 @@ public class Main {
         blackList.add(1);
         blackList.add(7);
 
+
         lol(abonents, blocks, blackList);
 
 
     }
 
     public static List<Abonent> lol(List<Abonent> abonents, List<Block> blocks, List<Integer> black){
-        List<Integer> list = abonents.stream().map(Abonent::getPhone).collect(Collectors.toList());
-        list.removeAll(black);
-        System.out.println(list);
-        Iterator<Integer> iterator = list.iterator();
-        List<Block> blocks1 = blocks.stream()
-                .forEach(block -> {
-                    if (block.getStartNumber() < iterator.next()){
-                        
-                    }
-                });
-
-
+        Iterator<Integer> blackListIterator = black.iterator();
+        while (blackListIterator.hasNext()){
+            Integer buf = blackListIterator.next();
+            for(Block block: blocks){
+                if(block.getStartNumber() < buf && block.getEndNumber() > buf){
+                    blackListIterator.remove();
+                    blocks.add(new Block(block.getStartNumber(), buf - 1));
+                    blocks.add(new Block(buf + 1, block.getEndNumber()));
+                    break;
+                }else if(block.getStartNumber() == buf){
+                    blackListIterator.remove();
+                    blocks.add(new Block(block.getStartNumber(), buf - 1));
+                    blocks.add(new Block(buf + 1, block.getEndNumber()));
+                    break;
+                }
+            }
+        }
+        System.out.println(blocks);
 
         return null;
 
