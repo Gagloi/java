@@ -26,8 +26,11 @@ public class Main {
         blocks.add(block2);
 
         List<Integer> blackList = new ArrayList<>();
-        blackList.add(1);
+        blackList.add(3);
         blackList.add(7);
+        blackList.add(9);
+        blackList.add(10);
+        blackList.add(15);
 
 
         lol(abonents, blocks, blackList);
@@ -37,18 +40,26 @@ public class Main {
 
     public static List<Abonent> lol(List<Abonent> abonents, List<Block> blocks, List<Integer> black){
         Iterator<Integer> blackListIterator = black.iterator();
+        List<Block> newBlockList = new ArrayList<>();
         while (blackListIterator.hasNext()){
             Integer buf = blackListIterator.next();
             for(Block block: blocks){
+                System.out.println(block);
                 if(block.getStartNumber() < buf && block.getEndNumber() > buf){
-                    blackListIterator.remove();
+                    blocks.remove(block);
                     blocks.add(new Block(block.getStartNumber(), buf - 1));
                     blocks.add(new Block(buf + 1, block.getEndNumber()));
+                    blackListIterator.remove();
                     break;
                 }else if(block.getStartNumber() == buf){
-                    blackListIterator.remove();
-                    blocks.add(new Block(block.getStartNumber(), buf - 1));
+                    blocks.remove(block);
                     blocks.add(new Block(buf + 1, block.getEndNumber()));
+                    blackListIterator.remove();
+                    break;
+                }else if(block.getEndNumber() == buf){
+                    blocks.remove(block);
+                    blocks.add(new Block(block.getStartNumber(),buf - 1));
+                    blackListIterator.remove();
                     break;
                 }
             }
