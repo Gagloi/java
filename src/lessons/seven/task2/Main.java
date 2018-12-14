@@ -28,6 +28,7 @@ public class Main {
         List<Integer> blackList = new ArrayList<>();
         blackList.add(3);
         blackList.add(7);
+        blackList.add(8);
         blackList.add(9);
         blackList.add(10);
         blackList.add(15);
@@ -51,18 +52,23 @@ public class Main {
                     blocks.add(new Block(buf + 1, block.getEndNumber()));
                     blackListIterator.remove();
                     break;
-                }else if(block.getStartNumber() == buf){
+                }else if(block.getStartNumber() == buf && block.getEndNumber() != buf){
                     blocks.remove(block);
                     blocks.add(new Block(buf + 1, block.getEndNumber()));
                     blackListIterator.remove();
                     break;
-                }else if(block.getEndNumber() == buf){
+                }else if(block.getEndNumber() == buf && block.getStartNumber() != buf){
                     blocks.remove(block);
                     blocks.add(new Block(block.getStartNumber(),buf - 1));
                     blackListIterator.remove();
                     break;
+                }else if (block.getStartNumber() == buf && block.getEndNumber() == buf){
+                    blocks.remove(block);
+                    blackListIterator.remove();
+                    break;
                 }
             }
+            System.out.println("____________________");
         }
         System.out.println(blocks);
 
