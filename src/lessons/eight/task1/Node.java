@@ -37,13 +37,13 @@ public class Node implements Runnable {
     public void recPreOrder() throws InterruptedException{
         if (left!=null) {
             System.out.println(left.inf);
-            System.out.println(left);
+            System.out.println(stringBuilder.append(left.label + "->"));
             Thread.sleep(1000);
             left.recPreOrder();
         }
         if (right!=null) {
             System.out.println(right.inf);
-            System.out.println(right);
+            System.out.println(stringBuilder.append(right.label + "->"));
             Thread.sleep(1000);
             right.recPreOrder();
         }
