@@ -24,25 +24,24 @@ public class Node implements Runnable {
 
     @Override
     public void run(){
-        System.out.println("ruuuuuuun");
-        if(used.compareAndSet(false, true)){
-            try {
-             recPreOrder();
-            }catch (InterruptedException e){
+        try {
+         recPreOrder();
+        }catch (InterruptedException e){
 
-            }
         }
     }
 
     public void recPreOrder() throws InterruptedException{
-        if (left!=null) {
+        if (left!=null && used.compareAndSet(false, true)) {
             System.out.println(left.inf);
+            System.out.println(Thread.currentThread().getName());
             System.out.println(stringBuilder.append(left.label + "->"));
             Thread.sleep(1000);
             left.recPreOrder();
         }
-        if (right!=null) {
+        if (right!=null && used.compareAndSet(false, true)) {
             System.out.println(right.inf);
+            System.out.println(Thread.currentThread().getName());
             System.out.println(stringBuilder.append(right.label + "->"));
             Thread.sleep(1000);
             right.recPreOrder();
