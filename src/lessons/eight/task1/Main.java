@@ -1,5 +1,7 @@
 package lessons.eight.task1;
 
+import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
@@ -8,14 +10,17 @@ public class Main {
 
     public static void main(String[] args) {
         StringBuilder stringBuilder = new StringBuilder();
-        Node node = new Node(4, "thirdLeft", new AtomicBoolean(), new Node(5, "secondLeft", new AtomicBoolean(), null, null, stringBuilder), new Node(3, "thirdRight", new AtomicBoolean(), null, null, stringBuilder), stringBuilder);
-        Tree tree1 = new Tree(new Node(1, "third", new AtomicBoolean(), node, node, stringBuilder));
+        Tree<Tree.Node> tree = new Tree<Tree.Node>(new Tree.Node(0, "0", new AtomicBoolean(), stringBuilder));
 
-        Thread thread1 = new Thread(tree1);
-        Thread thread2 = new Thread(tree1);
-        Thread thread3 = new Thread(tree1);
-        Thread thread4 = new Thread(tree1);
+        Thread thread1 = new Thread(tree);
+        Thread thread2 = new Thread(tree);
+        Thread thread3 = new Thread(tree);
+        Thread thread4 = new Thread(tree);
         Thread stringThread = new Thread();
+
+
+        tree.traverseTree2(tree.root);
+
 
         thread1.start();
         thread2.start();
