@@ -39,7 +39,7 @@ public class Tree<T> implements Runnable{
     }
 
 
-    synchronized void traverseTree2(Node<T> element) {
+     void traverseTree2(Node<T> element) {
         if (element.children != null){
             for (Node<T> child : element.children) {
                 System.out.println(child.label + Thread.currentThread().getName());
