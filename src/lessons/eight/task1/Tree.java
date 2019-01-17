@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 public class Tree<T> implements Runnable{
-    public Node<T> root;
+    public volatile Node<T> root;
     public Tree(T rootData) {
         root = new Node<T>(0, "0", new AtomicBoolean(), new StringBuilder());
         root.data = rootData;
@@ -27,22 +27,27 @@ public class Tree<T> implements Runnable{
     @Override
     public void run() {
         if(root.used.compareAndSet(false, true)){
-            System.out.println(Thread.currentThread().getName());
+            System.out.println(Thread.currentThread().getName() + root.label);
             try {
                 Thread.sleep(1000);
             }catch (InterruptedException e){
 
             }
         }else if(root.children != null){
-            System.out.println(Thread.currentThread().getName());
+            traverseTree2(root);
         }
     }
 
 
-    void traverseTree2(Node<T> element) {
+    synchronized void traverseTree2(Node<T> element) {
         if (element.children != null){
             for (Node<T> child : element.children) {
-                System.out.println(child.label);
+                System.out.println(child.label + Thread.currentThread().getName());
+                try {
+                    Thread.sleep(1000);
+                }catch (InterruptedException e){
+
+                }
                 traverseTree2(child);
             }
         }
@@ -58,7 +63,7 @@ public class Tree<T> implements Runnable{
         volatile AtomicBoolean used;
 
         private Node<T> parent;
-        private List<Node<T>> children;
+        private volatile List<Node<T>> children;
 
         public Node(int inf, String label, AtomicBoolean used, StringBuilder stringBuilder) {
             this.label = label;

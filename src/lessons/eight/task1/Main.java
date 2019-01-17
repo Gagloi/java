@@ -18,10 +18,6 @@ public class Main {
         Thread thread4 = new Thread(tree);
         Thread stringThread = new Thread();
 
-
-        tree.traverseTree2(tree.root);
-
-
         thread1.start();
         thread2.start();
         thread3.start();
