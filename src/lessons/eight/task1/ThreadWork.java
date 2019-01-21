@@ -1,26 +1,13 @@
 package lessons.eight.task1;
 
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
-public class Node {
-    int inf;
+public class ThreadWork implements Runnable{
+    Node root;
 
-    public AtomicBoolean used;
-    public String label;
 
-    Node left;
-    Node right;
-
-    public Node(int inf, Node left, Node right, AtomicBoolean used) {
-        this.inf = inf;
-        this.left = left;
-        this.right = right;
-        this.used = used;
-    }
-
-    public void recPreOrder(Consumer consumer){
+    /*public void recPreOrder(Consumer consumer){
         if (left!=null) {
             consumer.accept(left);
             left.recPreOrder(consumer);
@@ -29,8 +16,13 @@ public class Node {
             consumer.accept(right);
             right.recPreOrder(consumer);
         }
+    }*/
+
+    ThreadWork (Node root){
+        this.root = root;
     }
-/*
+
+
     @Override
     public void run() {
         Consumer consumer = new Consumer() {
@@ -49,6 +41,6 @@ public class Node {
                 }
             }
         };
-        recPreOrder(consumer);
-    }*/
+        root.recPreOrder(consumer);
+    }
 }
