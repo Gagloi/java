@@ -20,6 +20,7 @@ public class Main {
 
         Thread stringThread = new Thread();
 
+
         thread1.start();
         thread2.start();
         thread3.start();

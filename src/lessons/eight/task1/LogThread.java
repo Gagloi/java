@@ -3,13 +3,15 @@ package lessons.eight.task1;
 import java.util.Random;
 import java.util.function.Consumer;
 
-public class ThreadWork implements Runnable{
-    Node root;
+public class LogThread implements Runnable {
 
-    ThreadWork (Node root){
+    private Node root;
+    private StringBuilder stringBuilder;
+
+    LogThread(Node root, StringBuilder stringBuilder){
         this.root = root;
+        this.stringBuilder = stringBuilder;
     }
-
 
     @Override
     public void run() {
@@ -17,18 +19,15 @@ public class ThreadWork implements Runnable{
             @Override
             public void accept(Object o) {
                 Node node = (Node) o;
-                //System.out.println(((Node) o).inf);
                 if (((Node) o).used.compareAndSet(false, true)){
                     System.out.println(((Node) o).inf + Thread.currentThread().getName());
                     try {
-                        Random random = new Random();
-                        Thread.sleep(random.nextInt(5000));
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
             }
         };
-        root.recPreOrder(consumer);
     }
 }
