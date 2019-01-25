@@ -15,19 +15,6 @@ public class LogThread implements Runnable {
 
     @Override
     public void run() {
-        Consumer consumer = new Consumer() {
-            @Override
-            public void accept(Object o) {
-                Node node = (Node) o;
-                if (((Node) o).used.compareAndSet(false, true)){
-                    System.out.println(((Node) o).inf + Thread.currentThread().getName());
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        };
+            root.logPreOrder();
     }
 }

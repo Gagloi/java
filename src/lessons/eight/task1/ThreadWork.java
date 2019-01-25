@@ -29,6 +29,7 @@ public class ThreadWork implements Runnable{
                 }
             }
         };
+        consumer.accept(root);
         root.recPreOrder(consumer);
     }
 }

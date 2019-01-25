@@ -30,6 +30,27 @@ public class Node {
             right.recPreOrder(consumer);
         }
     }
+
+    public void logPreOrder(){
+        if (left!=null) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName() + left.inf);
+            left.logPreOrder();
+        }
+        if (right!=null) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName() + left.inf);
+            right.logPreOrder();
+        }
+    }
 /*
     @Override
     public void run() {
