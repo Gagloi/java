@@ -15,6 +15,28 @@ public class LogThread implements Runnable {
 
     @Override
     public void run() {
-            root.logPreOrder();
+         recPreOrder(root);
+
+    }
+
+    public void recPreOrder(Node node){
+        if (node.left!=null) {
+            try {
+                System.out.println(stringBuilder);
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            recPreOrder(node.left);
+        }
+        if (node.right!=null) {
+            try {
+                System.out.println(stringBuilder);
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            recPreOrder(node.right);
+        }
     }
 }

@@ -1,7 +1,7 @@
 package lessons.eight.task1;
 
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.function.Consumer;
+
 
 public class Main {
 
@@ -16,14 +16,15 @@ public class Main {
         Thread thread2 = new Thread(threadWork);
         Thread thread3 = new Thread(threadWork);
         Thread thread4 = new Thread(threadWork);
-        StringBuilder stringBuilder = new StringBuilder();
 
-        LogThread logThread = new LogThread(tree.root, stringBuilder);
+
+        LogThread logThread = new LogThread(tree.root, tree.root.builder);
         Thread log = new Thread(logThread);
 
         log.start();
 
         thread1.start();
+
         thread2.start();
         thread3.start();
         thread4.start();

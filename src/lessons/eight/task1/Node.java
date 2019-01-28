@@ -9,6 +9,7 @@ public class Node {
 
     public AtomicBoolean used;
     public String label;
+    public StringBuilder builder = new StringBuilder();
 
     Node left;
     Node right;
@@ -30,46 +31,4 @@ public class Node {
             right.recPreOrder(consumer);
         }
     }
-
-    public void logPreOrder(){
-        if (left!=null) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println(Thread.currentThread().getName() + left.inf);
-            left.logPreOrder();
-        }
-        if (right!=null) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println(Thread.currentThread().getName() + left.inf);
-            right.logPreOrder();
-        }
-    }
-/*
-    @Override
-    public void run() {
-        Consumer consumer = new Consumer() {
-            @Override
-            public void accept(Object o) {
-                Node node = (Node) o;
-                //System.out.println(((Node) o).inf);
-                if (((Node) o).used.compareAndSet(false, true)){
-                    System.out.println(((Node) o).inf + Thread.currentThread().getName());
-                    try {
-                        Random random = new Random();
-                        Thread.sleep(random.nextInt(5000));
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        };
-        recPreOrder(consumer);
-    }*/
 }
