@@ -1,0 +1,15 @@
+Thread-1 get the node with info 100
+Thread-2 get the node with info 1
+Thread-3 get the node with info 2
+Thread-0 get the node with info 3
+Thread-1 get the node with info 4
+Thread-1 get the node with info 5
+Thread-0 get the node with info 6
+Thread-1 get the node with info 7
+Thread-3 get the node with info 8
+Thread-2 get the node with info 9
+Thread-0 get the node with info 10
+Thread-2 get the node with info 11
+Thread-0 get the node with info 12
+Thread-1 get the node with info 13
+Thread-3 get the node with info 14
