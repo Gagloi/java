@@ -19,6 +19,7 @@ public class Node {
         this.left = left;
         this.right = right;
         this.used = used;
+        this.label = "Node " + inf + " is free";
     }
 
     public void recPreOrder(Consumer consumer){
@@ -32,3 +33,4 @@ public class Node {
         }
     }
 }
+

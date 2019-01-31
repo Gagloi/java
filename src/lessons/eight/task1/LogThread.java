@@ -9,42 +9,49 @@ import java.util.function.Consumer;
 public class LogThread implements Runnable {
 
     private Node root;
-    private File file;
-    private StringBuilder stringBuilder;
     private FileWriter writer;
 
-    LogThread(Node root, StringBuilder stringBuilder){
+    LogThread(Node root, File file){
         this.root = root;
-        this.stringBuilder = stringBuilder;
-        this.file = new File("log.txt");
         try {
-            file.createNewFile();
             writer = new FileWriter(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
     }
 
     @Override
     public void run() {
         try {
-            recPreOrder(root);
+            recursiveFunc();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
     public void recPreOrder(Node node) throws IOException{
-
-
         if (node.left!=null) {
-            writer.write(Thread.currentThread().getName() + " get the node with info " + node.inf + "\n");
+            writer.write(node.left.label + "\n");
             recPreOrder(node.left);
         }
         if (node.right!=null) {
-            writer.write(Thread.currentThread().getName() + " get the node with info " + node.inf + "\n");
+            writer.write(node.right.label + "\n");
             recPreOrder(node.right);
         }
+    }
+
+    void recursiveFunc() throws IOException, InterruptedException {
+        writer.write(root.label + "\n");
+        recPreOrder(root);
+        while(Tree.isAllNodes != 15){
+            Thread.sleep(1000);
+            writer.write(root.label + "\n");
+            recPreOrder(root);
+        }
+        writer.close();
     }
 }
